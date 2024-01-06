@@ -1,0 +1,16 @@
+[package]
+name = "wasm-rust"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[lib]
+# crate-type: 指定了生成库的类型
+# cdylib: 生成动态链接库（C-compatible dynamic library），
+# 这用于编译一个供其他编程语言加载的动态库。此输出类型将在 Linux 上创建 *.so 文件，在 macOS 上创建 *.dylib 文件，在 Windows 上创建 *.dll 文件。
+# 这种类型的库可以被其他编程语言调用，因为它们与 C 语言兼容。这对于与 WebAssembly（Wasm）互操作性很重要，因为 Wasm 通常需要与 C 语言接口进行交互。
+crate-type = ["cdylib"]
+
+[dependencies]
+wasm-bindgen = "0.2"
