@@ -1,1 +1,7 @@
+# rust
 target
+pkg
+
+# web
+node_modules
+dist
