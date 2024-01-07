@@ -31,3 +31,20 @@ npm run serve
 # 构建程序
 npm run build
 ```
+
+### 原理探析
+
+在使用 cargo 和 wasm_bindgen 编译源代码时，会在 pkg 文件中「自动生成」以下文件：
+
+- wasm_rust_bg.js
+- wasm_rust_bg.wasm
+- wasm_rust_bg.wasm.d.ts
+- wasm_rust.js
+- wasm_rust.d.ts
+- package.json
+
+> wasm_rust_bg.js 文件是由 wasm-bindgen 自动生成的，它包含了用于将 DOM 和 JavaScript 函数导入到 Rust 中的 JavaScript 粘合代码。它还在生成的 WebAssembly 函数上向 JavaScript 公开了 API。
+
+Rust WebAssembly 专注于将 WebAssembly 与现有的 JavaScript 应用程序集成在一起。为了实现这一目标，我们需要在 JavaScript 和 WebAssembly 函数之间「传递不同的值、对象或结构。这并不容易，因为需要协调两个不同系统的不同对象类型」。
+
+当前 WebAssembly 仅支持「整数」和「浮点数」，不支持字符串。这意味着我们不能简单地将字符串传递给 WebAssembly 函数。
