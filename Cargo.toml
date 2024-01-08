@@ -14,3 +14,10 @@ crate-type = ["cdylib"]
 
 [dependencies]
 wasm-bindgen = "0.2"
+
+# 为了保持构建速度非常快，web-sys 将每个 Web 接口都封装在一个 Cargo 特性后面。在 API 文档中找到我们要使用的类型或方法；它将列出必须启用的特性才能访问该 API。
+# 例如，如果我们要查找 window.resizeTo 函数，我们会在 API 文档中搜索 resizeTo。
+# 我们将找到 web_sys::Window::resize_to 函数，它需要启用 Window 特性。要访问该函数，我们在 Cargo.toml 中启用 Window 特性
+[dependencies.web-sys]
+version = "0.3" 
+features = [ "Window" ]
